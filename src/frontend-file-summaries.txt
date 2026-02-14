@@ -1,0 +1,22 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the HomePage with ThemeProvider and Toaster for notifications.",
+  "frontend/src/pages/HomePage.tsx": "Complete home page with header, base currency selector, live rates table with historical chart integration, comparison panel, and footer with proper attribution.",
+  "frontend/src/features/rates/api/exchangeRates.ts": "Centralized API module for fetching exchange rates from Frankfurter API with exported base URL constant for reuse across live and historical rate fetchers.",
+  "frontend/src/features/rates/hooks/useLiveRates.ts": "React Query hook that fetches live exchange rates with 60-second auto-refresh and error handling.",
+  "frontend/src/features/rates/currencyMeta.ts": "Currency metadata map providing display names for 30+ common currency codes.",
+  "frontend/src/features/rates/components/BaseCurrencySelect.tsx": "Dropdown component for selecting the base currency with currency names.",
+  "frontend/src/features/rates/components/RatesToolbar.tsx": "Toolbar with last-updated timestamp and manual refresh button.",
+  "frontend/src/features/rates/components/RatesTable.tsx": "Searchable and sortable table displaying all exchange rates with loading/error states and per-row chart button to open historical view without resetting table state.",
+  "frontend/src/features/compare/components/CurrencyComparePanel.tsx": "Panel for selecting 2-3 currencies to compare with validation and side-by-side rate cards.",
+  "frontend/src/features/compare/components/ConversionWidget.tsx": "Interactive widget for converting amounts between selected currencies.",
+  "frontend/src/features/compare/lib/conversion.ts": "Utility function for cross-currency conversion calculations using base-relative rates.",
+  "frontend/src/index.css": "Global styles with emerald/teal OKLCH color system for finance theme in light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom finance theme colors, fonts (Inter, JetBrains Mono), and extended design tokens.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for backend queries (not used since app fetches from public REST API).",
+  "frontend/src/features/rates/lib/dateRanges.ts": "Date range utilities providing preset types (7D, 1M, 3M, 1Y), computation functions for start/end dates, and helper functions for labels.",
+  "frontend/src/features/rates/api/historicalRates.ts": "Historical exchange rate fetcher using Frankfurter API time-series endpoint to retrieve rate points for a currency pair over a date range.",
+  "frontend/src/features/rates/hooks/useHistoricalRates.ts": "React Query hook for fetching historical exchange rates with caching keyed by base currency, target currency, and date range preset.",
+  "frontend/src/features/rates/components/DateRangePresets.tsx": "Small preset control component with buttons for 7D/1M/3M/1Y ranges that highlights the active selection and emits range changes.",
+  "frontend/src/features/rates/components/HistoricalRatesChart.tsx": "Lightweight SVG-based time-series line chart component with responsive rendering, memoized calculations, and interactive tooltips for historical rate data.",
+  "frontend/src/features/rates/components/HistoricalRatesPanel.tsx": "Historical view panel component with chart, date range presets, manual refresh control, and consistent loading/error states using shadcn/ui primitives."
+}

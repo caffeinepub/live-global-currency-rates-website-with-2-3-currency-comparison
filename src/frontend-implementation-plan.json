@@ -1,0 +1,122 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add historical exchange-rate charts with date ranges and caching",
+  "requirements": [
+    {
+      "id": "REQ-5",
+      "summary": "Add a historical chart view for a selected target currency relative to the currently selected base currency, fetching data from Frankfurter using the existing API base URL constant.",
+      "acceptanceCriteria": [
+        "From the main UI, a user can open a historical view for a specific currency.",
+        "The historical chart reflects the currently selected base currency (e.g., base=USD, target=EUR shows EUR per 1 USD over time).",
+        "Historical data fetching uses the existing Frankfurter API base (https://api.frankfurter.app) and does not require authentication.",
+        "The historical view has clear loading and error states consistent with the rest of the app."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/rates/api/exchangeRates.ts",
+          "operation": "modify",
+          "description": "Export the existing Frankfurter API base URL constant so historical fetching can reuse the same constant (https://api.frankfurter.app) rather than introducing a new base. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/api/historicalRates.ts",
+          "operation": "create",
+          "description": "Add a dedicated historical-rates fetcher that uses the exported Frankfurter API base URL constant to retrieve time-series rates for (baseCurrency, targetCurrency) over a computed date interval. Keep it separate from the live-rates fetcher. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+          "operation": "create",
+          "description": "Create a historical view panel component that renders: title/context (base -> target), a chart area, and consistent loading/error/empty states using existing shadcn/ui primitives already used elsewhere (e.g., Alert/Skeleton/Button where available). Include a close control to dismiss the view. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
+          "operation": "create",
+          "description": "Implement a lightweight, dependency-minimal time-series chart component (e.g., SVG line chart) to plot historical rate points. Ensure it is performant for longer ranges and renders correctly for varying data lengths. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Wire the historical view into the main UI: store selected target currency for history, render HistoricalRatesPanel without unmounting the RatesTable (so table search/sort state is preserved), and pass the current baseCurrency into the historical view. (Verify the component's usage instructions before implementing.)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add a date-range control with presets (7D, 1M, 3M, 1Y) that updates the historical chart when changed and keeps the UI responsive.",
+      "acceptanceCriteria": [
+        "User can switch between 7D/1M/3M/1Y ranges and the chart refreshes accordingly.",
+        "The selected range is visible in the UI and persists while the historical view is open.",
+        "For long ranges (e.g., 1Y), the UI remains responsive (rendering and state updates do not noticeably lag)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/rates/lib/dateRanges.ts",
+          "operation": "create",
+          "description": "Add utilities/types for historical date ranges (7D/1M/3M/1Y) and helpers to compute start/end dates used by the historical fetcher. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/DateRangePresets.tsx",
+          "operation": "create",
+          "description": "Create a small preset control (7D/1M/3M/1Y) that highlights the active range and emits range changes. Prefer composing existing shadcn/ui buttons/toggles if present; do not modify any files under frontend/src/components/ui. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+          "operation": "modify",
+          "description": "Add the date-range presets control to the historical panel; keep the selected range in component state so it persists while the panel remains open, and trigger chart data updates when the range changes. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
+          "operation": "modify",
+          "description": "Ensure the chart rendering remains responsive for long ranges (e.g., memoize derived points/scales, avoid unnecessary re-renders when unrelated state changes). (Verify the component's usage instructions before implementing.)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add a dedicated React Query hook for historical rates that caches by (baseCurrency, targetCurrency, dateRange) and supports manual refresh with actionable retry on failure.",
+      "acceptanceCriteria": [
+        "Historical queries are keyed by base, target, and range so switching currencies/ranges does not overwrite other cached results.",
+        "A manual refresh control in the historical view triggers a refetch for the currently viewed currency and range.",
+        "Network failures show an actionable retry option without breaking the rest of the page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/rates/hooks/useHistoricalRates.ts",
+          "operation": "create",
+          "description": "Implement a React Query hook wrapping the historical-rates fetcher with a queryKey that includes baseCurrency, targetCurrency, and selected dateRange preset. Configure retries similarly to live rates where appropriate. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+          "operation": "modify",
+          "description": "Integrate useHistoricalRates into the historical view; add a manual refresh button that calls the hook's refetch for the active (base, target, range). Provide an error UI with an explicit retry action consistent with the rest of the app. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/features/rates/api/historicalRates.ts",
+          "operation": "modify",
+          "description": "Align historical fetcher inputs/outputs with the hook needs (base, target, computed start/end for the selected range) and ensure failures surface as meaningful errors for UI handling. (Verify the component's usage instructions before implementing.)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add an entry point from the existing searchable/sortable rates table to open the historical chart without breaking table behavior or resetting search/sort state.",
+      "acceptanceCriteria": [
+        "A user can open a chart for a currency directly from the rates table UI.",
+        "Search and sorting in the rates table continues to work exactly as before.",
+        "Opening/closing the historical view does not reset the table’s search query or sorting state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/rates/components/RatesTable.tsx",
+          "operation": "modify",
+          "description": "Add a non-disruptive per-row action (e.g., a small button) to open the historical view for that row's currency. Keep existing search/sort logic unchanged; do not reset internal state when the action is used. Use existing shadcn/ui Button/Table primitives as currently composed; do not modify files under frontend/src/components/ui. (Verify the component's usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Pass an onOpenHistorical handler into RatesTable, maintain selected target currency state in HomePage, and implement open/close behavior for the historical panel in a way that does not remount RatesTable (preserving its search/sort state). (Verify the component's usage instructions before implementing.)"
+        }
+      ]
+    }
+  ]
+}

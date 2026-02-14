@@ -1,2 +1,3 @@
-# live-global-currency-rates-website-with-2-3-currency-comparison
-Exported from Caffeine project: Live global currency rates website with 2–3 currency comparison
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

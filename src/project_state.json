@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Website that displays live global currency exchange rates and allows comparing 2–3 currencies.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-home-page-that-shows-live-global-currency-exchange-rates-in-a-searchable-sortable-table-with-a-user-selectable-base-currency-default-to-usd-display-currency-code-currency-name-if-available-and-the-current-rate-relative-to-the-selected-base",
+      "title": "Create a home page that shows live global currency exchange rates in a searchable/sortable table, with a user-selectable base currency (default to USD). Display: currency code, currency name (if available), and the current rate relative to the selected base.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-comparison-feature-that-lets-users-pick-either-2-or-3-currencies-to-compare-side-by-side-including-1-each-selected-currency-s-rate-relative-to-the-chosen-base-currency-and-2-a-simple-conversion-widget-where-the-user-enters-an-amount-and-sees-converted-amounts-for-the-other-selected-currencies",
+      "title": "Add a comparison feature that lets users pick either 2 or 3 currencies to compare side-by-side, including: (1) each selected currency’s rate relative to the chosen base currency, and (2) a simple conversion widget where the user enters an amount and sees converted amounts for the other selected currencies.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-live-rate-fetching-with-automatic-refresh-using-react-query-use-a-public-exchange-rate-rest-api-endpoint-that-does-not-require-third-party-authentication-for-basic-usage-or-provide-a-single-configurable-endpoint-constant-so-the-data-source-can-be-swapped-later",
+      "title": "Implement live rate fetching with automatic refresh using React Query. Use a public exchange-rate REST API endpoint that does not require third-party authentication for basic usage (or provide a single configurable endpoint constant so the data source can be swapped later).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-coherent-distinctive-visual-theme-and-apply-it-consistently-across-the-app-layout-typography-spacing-components-avoid-a-blue-purple-primary-palette-use-a-different-primary-color-direction-suitable-for-a-finance-data-dashboard",
+      "title": "Add a coherent, distinctive visual theme and apply it consistently across the app (layout, typography, spacing, components). Avoid a blue/purple primary palette; use a different primary color direction suitable for a finance/data dashboard.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-historical-exchange-rate-charting-for-a-selected-currency-relative-to-the-currently-selected-base-currency-using-the-existing-frankfurter-api-base-url-constant-https-api-frankfurter-app",
+      "title": "Add historical exchange-rate charting for a selected currency relative to the currently selected base currency, using the existing Frankfurter API base URL constant (https://api.frankfurter.app).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-date-range-control-for-historical-charts-with-at-least-these-presets-7d-1m-3m-1y-and-ensure-the-chart-updates-when-the-range-changes",
+      "title": "Implement a date-range control for historical charts with at least these presets: 7D, 1M, 3M, 1Y, and ensure the chart updates when the range changes.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-historical-rates-data-fetcher-and-react-query-hook-separate-from-live-rates-that-caches-results-by-basecurrency-targetcurrency-daterange-and-supports-manual-refresh-within-the-historical-view",
+      "title": "Add a dedicated historical-rates data fetcher and React Query hook (separate from live rates) that caches results by (baseCurrency, targetCurrency, dateRange) and supports manual refresh within the historical view.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expose-an-entry-point-to-open-historical-charts-from-the-existing-rates-ui-the-searchable-sortable-rates-table-without-removing-or-breaking-existing-table-sorting-search-behavior",
+      "title": "Expose an entry point to open historical charts from the existing rates UI (the searchable/sortable rates table), without removing or breaking existing table sorting/search behavior.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Display live world currency exchange rates",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Allow users to compare 2 or 3 currencies side-by-side",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add historical exchange-rate charts for each currency",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Live global currency rates website with 2–3 currency comparison",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

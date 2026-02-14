@@ -1,0 +1,87 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-historical-exchange-rate-charting-for-a-selected-currency-relative-to-the-currently-selected-base-currency-using-the-existing-frankfurter-api-base-url-constant-https-api-frankfurter-app",
+      "featureTitle": "Add historical exchange-rate charting for a selected currency relative to the currently selected base currency, using the existing Frankfurter API base URL constant (https://api.frankfurter.app).",
+      "files": [
+        "frontend/src/features/rates/api/exchangeRates.ts",
+        "frontend/src/features/rates/api/historicalRates.ts",
+        "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
+        "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-date-range-control-for-historical-charts-with-at-least-these-presets-7d-1m-3m-1y-and-ensure-the-chart-updates-when-the-range-changes",
+      "featureTitle": "Implement a date-range control for historical charts with at least these presets: 7D, 1M, 3M, 1Y, and ensure the chart updates when the range changes.",
+      "files": [
+        "frontend/src/features/rates/components/DateRangePresets.tsx",
+        "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
+        "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+        "frontend/src/features/rates/lib/dateRanges.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-dedicated-historical-rates-data-fetcher-and-react-query-hook-separate-from-live-rates-that-caches-results-by-basecurrency-targetcurrency-daterange-and-supports-manual-refresh-within-the-historical-view",
+      "featureTitle": "Add a dedicated historical-rates data fetcher and React Query hook (separate from live rates) that caches results by (baseCurrency, targetCurrency, dateRange) and supports manual refresh within the historical view.",
+      "files": [
+        "frontend/src/features/rates/api/historicalRates.ts",
+        "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
+        "frontend/src/features/rates/hooks/useHistoricalRates.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-expose-an-entry-point-to-open-historical-charts-from-the-existing-rates-ui-the-searchable-sortable-rates-table-without-removing-or-breaking-existing-table-sorting-search-behavior",
+      "featureTitle": "Expose an entry point to open historical charts from the existing rates UI (the searchable/sortable rates table), without removing or breaking existing table sorting/search behavior.",
+      "files": [
+        "frontend/src/features/rates/components/RatesTable.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
