@@ -1,37 +1,36 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Move HomePage AdSense to single above-content placement",
+  "title": "Add Google AdSense head verification script and default env configuration",
   "requirements": [
     {
-      "id": "REQ-18",
-      "summary": "Position the HomePage AdSense block directly below the sticky header and above the main content/controls area.",
+      "id": "REQ-20",
+      "summary": "Load the Google AdSense script in the document head on initial SPA load and prevent duplicate loader scripts",
       "acceptanceCriteria": [
-        "On the Home page, an AdSense ad unit is rendered directly below the sticky header and before the main content/controls section.",
-        "The ad placement change does not break existing interactions (rates table search/sort, open/close historical panel, comparison panel).",
-        "If AdSense is not configured or the ad slot is missing/empty, the existing fallback UI (“Ad space” / “Advertisement”) still renders and reserves space to keep layout stable."
+        "On first load, the DOM contains a <script> element in <head> with src exactly `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5965886176480370`.",
+        "The script tag has `async` enabled and `crossorigin=\"anonymous\"`.",
+        "Navigating between routes/pages in the React SPA does not create additional duplicate AdSense script tags (only one AdSense loader script is present)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Adjust the HomePage layout so the single AdSenseAd render is placed in the above-content position (directly after the sticky header and before the main content/controls), keeping existing spacing and ensuring the fallback placeholder continues to reserve height for layout stability. Verify the component's usage instructions before implementing."
+          "description": "Update the existing head injection logic to ensure the AdSense loader script is appended to <head> on initial page load with async enabled and crossorigin=\"anonymous\", constructing the src exactly as `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${VITE_ADSENSE_CLIENT_ID}` when configured. Strengthen the no-duplicates guard by checking for an existing script tag with the same computed src (not only by element id), so repeated evaluations or future changes cannot create duplicate AdSense loader script tags."
         }
       ]
     },
     {
-      "id": "REQ-19",
-      "summary": "Ensure HomePage renders exactly one AdSenseAd placement (above-content only) and removes any other Home page ad placements.",
+      "id": "REQ-21",
+      "summary": "Set default developer env example for VITE_ADSENSE_CLIENT_ID while keeping the env-driven AdSense loading flow compatible",
       "acceptanceCriteria": [
-        "The Home page contains exactly one <AdSenseAd /> placement.",
-        "The ad is not rendered in the middle of the page content or near/above the footer once this change is implemented.",
-        "No console errors are introduced by changing the number/position of ad units."
+        "`frontend/.env.example` contains `VITE_ADSENSE_CLIENT_ID=ca-pub-5965886176480370` (exact value).",
+        "With `VITE_ADSENSE_CLIENT_ID` set to `ca-pub-5965886176480370`, the site loads the AdSense script successfully (no missing-client-id state for AdSense)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
+          "path": "frontend/.env.example",
           "operation": "modify",
-          "description": "Remove the middle-page and footer AdSenseAd sections so the HomePage contains only one above-content AdSenseAd; update imports accordingly to avoid unused slot helpers and ensure no console warnings/errors are introduced by the reduced number of ad units. Verify the component's usage instructions before implementing."
+          "description": "Set `VITE_ADSENSE_CLIENT_ID=ca-pub-5965886176480370` as the default example value, leaving the rest of the AdSense-related variables unchanged so the existing environment-variable-based setup remains the source of truth for AdSense configuration."
         }
       ]
     }

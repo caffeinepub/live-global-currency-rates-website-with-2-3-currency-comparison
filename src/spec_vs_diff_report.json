@@ -1,14 +1,31 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T19:07:01.514Z",
-  "summary": "HomePage.tsx was updated to render an AdSense block in a dedicated section directly below the sticky header and above the main content, aligning with the requested above-content placement. However, because the HomePage diff is truncated and no other related files (e.g., AdSenseAd component) are shown, it cannot be conclusively verified from the provided evidence that the Home page contains exactly one <AdSenseAd /> instance and no other placements elsewhere on the page, nor that fallback behavior remains unchanged.",
+  "generatedAt": "2026-02-15T10:59:12.117Z",
+  "summary": "REQ-20 and REQ-21 appear implemented via dynamic AdSense loader injection in `frontend/index.html` and default env var configuration in `frontend/.env.example`. However, the diff summary indicates additional AdSense ad placement and ad-slot configuration work that was not requested and may violate the stated non-goals (no new ad unit placements/layout changes).",
   "missing_requirements": [],
-  "hallucinated_features": [],
-  "confidence": 0.62,
+  "hallucinated_features": [
+    {
+      "description": "Added (or changed) AdSense ad unit placement(s) in the Home page layout (e.g., an above-content AdSense placement).",
+      "reason": "The BuildRequest explicitly states this task is only about adding the AdSense <head> verification/loader script and explicitly lists as a non-goal adding new AdSense ad unit placements or changing ad slot layout/positions.",
+      "evidence": [
+        "frontend-file-summaries.txt (HomePage described as having a \"single above-content AdSense ad placement\")"
+      ]
+    },
+    {
+      "description": "Introduced a centralized AdSense configuration module that reads additional ad slot IDs (top/middle/footer) from environment variables.",
+      "reason": "Only `VITE_ADSENSE_CLIENT_ID` default configuration and ensuring the loader script is present in <head> were requested; managing multiple ad slot IDs/config modules is out of scope for the request and aligns with adding/altering ad placement infrastructure.",
+      "evidence": [
+        "frontend-file-summaries.txt (mentions `frontend/src/config/adsense.ts` reading client ID and three ad slot IDs)",
+        "frontend/.env.example (adds `VITE_ADSENSE_TOP_BANNER_AD_SLOT`, `VITE_ADSENSE_BANNER_AD_SLOT`, `VITE_ADSENSE_FOOTER_BANNER_AD_SLOT`)"
+      ]
+    }
+  ],
+  "confidence": 0.74,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/.env.example",
+    "frontend/index.html",
     "project_state.json"
   ]
 }

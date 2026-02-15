@@ -1,54 +1,52 @@
 {
   "kind": "build_request",
-  "title": "Move the AdSense block to an above-content placement on HomePage",
+  "title": "Add the provided Google AdSense verification script to the site <head>",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-18",
-      "text": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
+      "id": "REQ-20",
+      "text": "Ensure the Google AdSense script with client ID `ca-pub-5965886176480370` is present in the document <head> for the CurrencyPal website (i.e., loaded on the initial page load and therefore applicable to all SPA routes/pages), matching the user-provided snippet, and without creating duplicate script tags.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Above"
+          "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5965886176480370\"\n     crossorigin=\"anonymous\"></script> \n(This is the code , please add it on <head></head> on each page of the website)"
         ]
       },
       "acceptanceCriteria": [
-        "On the Home page, an AdSense ad unit is rendered directly below the sticky header and before the main content/controls section.",
-        "The ad placement change does not break existing interactions (rates table search/sort, open/close historical panel, comparison panel).",
-        "If AdSense is not configured or the ad slot is missing/empty, the existing fallback UI (“Ad space” / “Advertisement”) still renders and reserves space to keep layout stable."
+        "On first load, the DOM contains a <script> element in <head> with src exactly `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5965886176480370`.",
+        "The script tag has `async` enabled and `crossorigin=\"anonymous\"`.",
+        "Navigating between routes/pages in the React SPA does not create additional duplicate AdSense script tags (only one AdSense loader script is present)."
       ]
     },
     {
-      "id": "REQ-19",
-      "text": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
+      "id": "REQ-21",
+      "text": "Set the frontend configuration so that `VITE_ADSENSE_CLIENT_ID` is configured to `ca-pub-5965886176480370` by default for developers (update `frontend/.env.example` accordingly), while keeping AdSense loading logic compatible with the existing environment-variable-based setup.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1"
         ],
         "quotes": [
-          "Above"
+          "client=ca-pub-5965886176480370"
         ]
       },
       "acceptanceCriteria": [
-        "The Home page contains exactly one <AdSenseAd /> placement.",
-        "The ad is not rendered in the middle of the page content or near/above the footer once this change is implemented.",
-        "No console errors are introduced by changing the number/position of ad units."
+        "`frontend/.env.example` contains `VITE_ADSENSE_CLIENT_ID=ca-pub-5965886176480370` (exact value).",
+        "With `VITE_ADSENSE_CLIENT_ID` set to `ca-pub-5965886176480370`, the site loads the AdSense script successfully (no missing-client-id state for AdSense)."
       ]
     }
   ],
   "constraints": [
-    "Use English for any user-facing text.",
-    "Do not edit files under frontend/immutablePaths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui).",
-    "Keep AdSense initialization safe on the client (no repeated pushes causing errors on re-render/navigation)."
+    "Do not edit files under `frontend/src/components/ui` (read-only).",
+    "Do not modify `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, or `frontend/src/main.tsx` (immutable paths).",
+    "Keep the backend as a single Motoko actor; no backend changes are required for this task."
   ],
   "nonGoals": [
-    "Adding new ad networks or non-AdSense monetization.",
-    "Changing exchange-rate APIs, currency calculations, or historical chart logic.",
-    "Backend changes (backend/main.mo) or any persistence/migration work."
+    "Do not add new AdSense ad unit placements or change existing ad slot layout/positions (this request is only about the AdSense <head> script/verification code).",
+    "Do not integrate third-party authentication methods (only Internet Identity is supported)."
   ],
   "imageRequirements": {
     "required": [],

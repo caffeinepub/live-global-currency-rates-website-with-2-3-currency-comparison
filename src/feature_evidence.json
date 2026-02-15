@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-homepage-layout-so-the-adsense-block-is-positioned-above-the-main-content-directly-under-the-sticky-header-and-above-the-controls-content-matching-the-user-s-selection-of-above-for-ad-placement",
-      "featureTitle": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
+      "featureId": "feature-ensure-the-google-adsense-script-with-client-id-ca-pub-5965886176480370-is-present-in-the-document-head-for-the-currencypal-website-i-e-loaded-on-the-initial-page-load-and-therefore-applicable-to-all-spa-routes-pages-matching-the-user-provided-snippet-and-without-creating-duplicate-script-tags",
+      "featureTitle": "Ensure the Google AdSense script with client ID `ca-pub-5965886176480370` is present in the document <head> for the CurrencyPal website (i.e., loaded on the initial page load and therefore applicable to all SPA routes/pages), matching the user-provided snippet, and without creating duplicate script tags.",
       "files": [
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/index.html"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,15 +15,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-18"
+        "REQ-20"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-ensure-homepage-renders-only-the-single-above-content-adsense-block-and-does-not-render-additional-adsense-placements-elsewhere-on-the-home-page-to-align-with-the-single-placement-choice-requested-by-the-user",
-      "featureTitle": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
+      "featureId": "feature-set-the-frontend-configuration-so-that-vite-adsense-client-id-is-configured-to-ca-pub-5965886176480370-by-default-for-developers-update-frontend-env-example-accordingly-while-keeping-adsense-loading-logic-compatible-with-the-existing-environment-variable-based-setup",
+      "featureTitle": "Set the frontend configuration so that `VITE_ADSENSE_CLIENT_ID` is configured to `ca-pub-5965886176480370` by default for developers (update `frontend/.env.example` accordingly), while keeping AdSense loading logic compatible with the existing environment-variable-based setup.",
       "files": [
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/.env.example"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,7 +33,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-19"
+        "REQ-21"
       ],
       "confidence": "high"
     }

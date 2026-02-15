@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T19:07:01.516Z",
+  "generatedAt": "2026-02-15T10:59:12.120Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,25 +11,25 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-18",
-        "summary": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
+        "id": "REQ-20",
+        "summary": "Ensure the Google AdSense script with client ID `ca-pub-5965886176480370` is present in the document <head> for the CurrencyPal website (i.e., loaded on the initial page load and therefore applicable to all SPA routes/pages), matching the user-provided snippet, and without creating duplicate script tags.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/index.html"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/index.html"
         ]
       },
       {
-        "id": "REQ-19",
-        "summary": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
+        "id": "REQ-21",
+        "summary": "Set the frontend configuration so that `VITE_ADSENSE_CLIENT_ID` is configured to `ca-pub-5965886176480370` by default for developers (update `frontend/.env.example` accordingly), while keeping AdSense loading logic compatible with the existing environment-variable-based setup.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/.env.example"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/.env.example"
         ]
       }
     ]
@@ -39,7 +39,8 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/.env.example",
+    "frontend/index.html",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,12 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 15,
   "summary": "CurrencyPal: a live global currency exchange rates website with 2–3 currency comparison, now planning custom domain setup and potential Google AdSense monetization.",
   "architectural_notes": [
     "App name set to \"currencyPal\".",
     "Planned custom domain to register/use: GetCurrencyPal.com (via external registrar) and connect to live deployment.",
     "User confirmed to proceed with adding Google AdSense code/integration to the site.",
-    "AdSense visible placement should be positioned above the main content (top-of-content placement), per user preference."
+    "AdSense visible placement should be positioned above the main content (top-of-content placement), per user preference.",
+    "User provided AdSense script tag with publisher/client ID ca-pub-5965886176480370 and requested it be placed in the <head> on all pages (site-wide head include)."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -160,6 +161,22 @@
       "title": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
       "reqIds": [
         "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-google-adsense-script-with-client-id-ca-pub-5965886176480370-is-present-in-the-document-head-for-the-currencypal-website-i-e-loaded-on-the-initial-page-load-and-therefore-applicable-to-all-spa-routes-pages-matching-the-user-provided-snippet-and-without-creating-duplicate-script-tags",
+      "title": "Ensure the Google AdSense script with client ID `ca-pub-5965886176480370` is present in the document <head> for the CurrencyPal website (i.e., loaded on the initial page load and therefore applicable to all SPA routes/pages), matching the user-provided snippet, and without creating duplicate script tags.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-set-the-frontend-configuration-so-that-vite-adsense-client-id-is-configured-to-ca-pub-5965886176480370-by-default-for-developers-update-frontend-env-example-accordingly-while-keeping-adsense-loading-logic-compatible-with-the-existing-environment-variable-based-setup",
+      "title": "Set the frontend configuration so that `VITE_ADSENSE_CLIENT_ID` is configured to `ca-pub-5965886176480370` by default for developers (update `frontend/.env.example` accordingly), while keeping AdSense loading logic compatible with the existing environment-variable-based setup.",
+      "reqIds": [
+        "REQ-21"
       ],
       "version": 1
     }
