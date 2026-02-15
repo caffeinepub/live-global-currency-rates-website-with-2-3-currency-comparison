@@ -1,8 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Website that displays live global currency exchange rates and allows comparing 2–3 currencies.",
-  "architectural_notes": [],
+  "projectStateVersion": 13,
+  "summary": "CurrencyPal: a live global currency exchange rates website with 2–3 currency comparison, now planning custom domain setup and potential Google AdSense monetization.",
+  "architectural_notes": [
+    "App name set to \"currencyPal\".",
+    "Planned custom domain to register/use: GetCurrencyPal.com (via external registrar) and connect to live deployment.",
+    "User confirmed to proceed with adding Google AdSense code/integration to the site.",
+    "AdSense visible placement should be positioned above the main content (top-of-content placement), per user preference."
+  ],
   "known_issues": [],
   "isFixRequest": false,
   "existing_features": [
@@ -69,6 +74,94 @@
         "REQ-8"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-google-adsense-support-to-the-react-site-by-loading-the-adsense-script-in-the-app-html-entrypoint-using-a-configurable-adsense-publisher-client-id-e-g-ca-pub-xxxxxxxxxxxxxxx-and-ensure-the-script-is-not-duplicated-across-navigations-renders",
+      "title": "Add Google AdSense support to the React site by loading the AdSense script in the app HTML entrypoint using a configurable AdSense publisher/client ID (e.g., ca-pub-XXXXXXXXXXXXXXX), and ensure the script is not duplicated across navigations/renders.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-reusable-ad-unit-component-that-renders-an-adsense-ad-slot-using-configurable-values-ad-slot-id-format-responsive-settings-and-safely-initializes-pushes-ads-only-on-the-client-after-the-script-has-loaded",
+      "title": "Create a reusable Ad unit component that renders an AdSense ad slot using configurable values (ad slot ID, format/responsive settings), and safely initializes (pushes) ads only on the client after the script has loaded.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-at-least-one-visible-adsense-placement-to-the-currencypal-ui-e-g-a-responsive-banner-in-the-main-content-area-or-footer-without-breaking-existing-layouts-and-interactions-rates-table-search-sort-historical-open-close-comparison-panel",
+      "title": "Add at least one visible AdSense placement to the CurrencyPal UI (e.g., a responsive banner in the main content area or footer) without breaking existing layouts and interactions (rates table search/sort, historical open/close, comparison panel).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-small-user-friendly-fallback-state-for-ad-slots-e-g-reserved-space-or-a-subtle-placeholder-when-ads-are-blocked-unavailable-or-configuration-is-missing-so-the-page-layout-remains-stable",
+      "title": "Add a small, user-friendly fallback state for ad slots (e.g., reserved space or a subtle placeholder) when ads are blocked/unavailable or configuration is missing, so the page layout remains stable.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-google-adsense-script-loader-in-frontend-index-html-to-use-the-vite-supported-environment-variable-interpolation-mechanism-instead-of-the-literal-vite-adsense-client-id-placeholder-so-that-setting-vite-adsense-client-id-actually-results-in-the-adsense-script-being-loaded-at-runtime-and-ensure-the-script-is-not-duplicated-if-already-present",
+      "title": "Fix the Google AdSense script loader in frontend/index.html to use the Vite-supported environment variable interpolation mechanism (instead of the literal '__VITE_ADSENSE_CLIENT_ID__' placeholder), so that setting VITE_ADSENSE_CLIENT_ID actually results in the AdSense script being loaded at runtime, and ensure the script is not duplicated if already present.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-visible-ad-placement-configurable-without-code-changes-by-moving-the-homepage-banner-ad-slot-id-out-of-the-hard-coded-value-1234567890-and-into-a-frontend-environment-variable-and-update-frontend-env-example-accordingly-if-the-ad-slot-variable-is-missing-empty-render-the-existing-adsense-fallback-ui-so-layout-remains-stable",
+      "title": "Make the visible ad placement configurable without code changes by moving the HomePage banner ad slot ID out of the hard-coded value ('1234567890') and into a frontend environment variable, and update frontend/.env.example accordingly. If the ad slot variable is missing/empty, render the existing AdSense fallback UI so layout remains stable.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-two-additional-clearly-defined-adsense-placement-locations-on-the-home-page-1-a-top-banner-ad-positioned-directly-under-the-sticky-header-and-above-the-main-controls-and-2-a-footer-banner-ad-positioned-directly-above-the-footer-each-placement-must-render-via-the-existing-reusable-adsensead-component-and-must-not-break-existing-layout-or-interactions-rates-table-search-sort-historical-open-close-comparison-panel",
+      "title": "Add two additional, clearly-defined AdSense placement locations on the Home page: (1) a \"Top banner\" ad positioned directly under the sticky header and above the main controls; and (2) a \"Footer banner\" ad positioned directly above the footer. Each placement must render via the existing reusable <AdSenseAd /> component and must not break existing layout or interactions (rates table search/sort, historical open/close, comparison panel).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-new-top-banner-and-footer-banner-ad-slot-ids-configurable-via-new-vite-environment-variables-and-update-frontend-env-example-accordingly-if-a-slot-env-var-is-missing-empty-the-corresponding-placement-must-render-the-existing-adsense-fallback-ui-reserved-space-placeholder-so-page-layout-remains-stable",
+      "title": "Make the new Top banner and Footer banner ad slot IDs configurable via new Vite environment variables, and update frontend/.env.example accordingly. If a slot env var is missing/empty, the corresponding placement must render the existing AdSense fallback UI (reserved space/placeholder) so page layout remains stable.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-adsense-initialization-remains-safe-with-multiple-ad-units-on-the-same-page-each-new-placement-must-only-attempt-to-push-ads-on-the-client-after-the-adsense-script-is-available-and-must-not-cause-console-errors-or-repeated-pushes-that-break-rendering-when-navigating-or-re-rendering-homepage",
+      "title": "Ensure AdSense initialization remains safe with multiple ad units on the same page: each new placement must only attempt to push ads on the client after the AdSense script is available, and must not cause console errors or repeated pushes that break rendering when navigating or re-rendering HomePage.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-homepage-layout-so-the-adsense-block-is-positioned-above-the-main-content-directly-under-the-sticky-header-and-above-the-controls-content-matching-the-user-s-selection-of-above-for-ad-placement",
+      "title": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-homepage-renders-only-the-single-above-content-adsense-block-and-does-not-render-additional-adsense-placements-elsewhere-on-the-home-page-to-align-with-the-single-placement-choice-requested-by-the-user",
+      "title": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -89,10 +182,16 @@
       "summary": "Add historical exchange-rate charts for each currency",
       "reqIds": [],
       "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Integrate Google AdSense (ads) into the CurrencyPal website",
+      "reqIds": [],
+      "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Live global currency rates website with 2–3 currency comparison",
+  "projectName": "currencyPal",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

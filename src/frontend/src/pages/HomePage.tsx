@@ -4,6 +4,8 @@ import { RatesTable } from '@/features/rates/components/RatesTable';
 import { RatesToolbar } from '@/features/rates/components/RatesToolbar';
 import { CurrencyComparePanel } from '@/features/compare/components/CurrencyComparePanel';
 import { HistoricalRatesPanel } from '@/features/rates/components/HistoricalRatesPanel';
+import { AdSenseAd } from '@/components/ads/AdSenseAd';
+import { getTopBannerAdSlot } from '@/config/adsense';
 import { useLiveRates } from '@/features/rates/hooks/useLiveRates';
 import { TrendingUp } from 'lucide-react';
 import { SiX, SiGithub } from 'react-icons/si';
@@ -63,6 +65,16 @@ export function HomePage() {
           </div>
         </div>
       </header>
+
+      {/* Ad Placement - Above Content */}
+      <section className="container mx-auto px-4 py-4">
+        <AdSenseAd
+          adSlot={getTopBannerAdSlot()}
+          adFormat="auto"
+          fullWidthResponsive={true}
+          className="w-full"
+        />
+      </section>
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-6 sm:py-8 space-y-8">

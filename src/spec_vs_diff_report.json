@@ -1,21 +1,13 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T15:19:49.236Z",
-  "summary": "The diff adds a full historical exchange-rate feature set: a Frankfurter-based historical fetcher, a dedicated React Query hook keyed by (base, target, range), UI for opening a historical panel from the rates table, date-range presets (7D/1M/3M/1Y), and loading/error/retry/refresh controls. No backend changes are shown and the Frankfurter base URL constant is reused.",
+  "generatedAt": "2026-02-14T19:07:01.514Z",
+  "summary": "HomePage.tsx was updated to render an AdSense block in a dedicated section directly below the sticky header and above the main content, aligning with the requested above-content placement. However, because the HomePage diff is truncated and no other related files (e.g., AdSenseAd component) are shown, it cannot be conclusively verified from the provided evidence that the Home page contains exactly one <AdSenseAd /> instance and no other placements elsewhere on the page, nor that fallback behavior remains unchanged.",
   "missing_requirements": [],
   "hallucinated_features": [],
-  "confidence": 0.78,
+  "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/features/rates/api/exchangeRates.ts",
-    "frontend/src/features/rates/api/historicalRates.ts",
-    "frontend/src/features/rates/components/DateRangePresets.tsx",
-    "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
-    "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-    "frontend/src/features/rates/components/RatesTable.tsx",
-    "frontend/src/features/rates/hooks/useHistoricalRates.ts",
-    "frontend/src/features/rates/lib/dateRanges.ts",
     "frontend/src/pages/HomePage.tsx",
     "project_state.json"
   ]

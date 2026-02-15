@@ -1,6 +1,6 @@
 {
   "frontend/src/App.tsx": "Main application component that wraps the HomePage with ThemeProvider and Toaster for notifications.",
-  "frontend/src/pages/HomePage.tsx": "Complete home page with header, base currency selector, live rates table with historical chart integration, comparison panel, and footer with proper attribution.",
+  "frontend/src/pages/HomePage.tsx": "Complete home page with header, single above-content AdSense ad placement, base currency selector, live rates table with historical chart integration, comparison panel, and footer with proper attribution.",
   "frontend/src/features/rates/api/exchangeRates.ts": "Centralized API module for fetching exchange rates from Frankfurter API with exported base URL constant for reuse across live and historical rate fetchers.",
   "frontend/src/features/rates/hooks/useLiveRates.ts": "React Query hook that fetches live exchange rates with 60-second auto-refresh and error handling.",
   "frontend/src/features/rates/currencyMeta.ts": "Currency metadata map providing display names for 30+ common currency codes.",
@@ -18,5 +18,10 @@
   "frontend/src/features/rates/hooks/useHistoricalRates.ts": "React Query hook for fetching historical exchange rates with caching keyed by base currency, target currency, and date range preset.",
   "frontend/src/features/rates/components/DateRangePresets.tsx": "Small preset control component with buttons for 7D/1M/3M/1Y ranges that highlights the active selection and emits range changes.",
   "frontend/src/features/rates/components/HistoricalRatesChart.tsx": "Lightweight SVG-based time-series line chart component with responsive rendering, memoized calculations, and interactive tooltips for historical rate data.",
-  "frontend/src/features/rates/components/HistoricalRatesPanel.tsx": "Historical view panel component with chart, date range presets, manual refresh control, and consistent loading/error states using shadcn/ui primitives."
+  "frontend/src/features/rates/components/HistoricalRatesPanel.tsx": "Historical view panel component with chart, date range presets, manual refresh control, and consistent loading/error states using shadcn/ui primitives.",
+  "frontend/index.html": "HTML entry point with AdSense script loader using Vite's import.meta.env for proper environment variable interpolation, with guards to prevent duplicate script injection and validate client ID format.",
+  "frontend/src/config/adsense.ts": "Centralized AdSense configuration module that reads client ID and three ad slot IDs (top banner, middle banner, footer banner) from environment variables and provides helper functions to check configuration status and retrieve values.",
+  "frontend/src/types/adsense.d.ts": "TypeScript global type declarations for the Google AdSense window.adsbygoogle array.",
+  "frontend/src/components/ads/AdSenseAd.tsx": "Reusable AdSense ad unit component with idempotent push logic per rendered element to safely support multiple ad units on the same page, with proper rerender guards, AdSense status attribute checking, and theme-matching fallback UI for blocked/unavailable/unconfigured ads.",
+  "frontend/.env.example": "Environment variable documentation file showing the required VITE_ADSENSE_CLIENT_ID and three ad slot configurations (VITE_ADSENSE_TOP_BANNER_AD_SLOT, VITE_ADSENSE_BANNER_AD_SLOT, VITE_ADSENSE_FOOTER_BANNER_AD_SLOT) for AdSense integration with usage notes."
 }

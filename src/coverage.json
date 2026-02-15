@@ -1,76 +1,34 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-14T15:19:49.238Z",
+  "generatedAt": "2026-02-14T19:07:01.516Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 4,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-5",
-        "summary": "Add historical exchange-rate charting for a selected currency relative to the currently selected base currency, using the existing Frankfurter API base URL constant (https://api.frankfurter.app).",
+        "id": "REQ-18",
+        "summary": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/features/rates/api/exchangeRates.ts",
-          "frontend/src/features/rates/api/historicalRates.ts",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
           "frontend/src/pages/HomePage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/features/rates/api/exchangeRates.ts",
-          "frontend/src/features/rates/api/historicalRates.ts",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
           "frontend/src/pages/HomePage.tsx"
         ]
       },
       {
-        "id": "REQ-6",
-        "summary": "Implement a date-range control for historical charts with at least these presets: 7D, 1M, 3M, 1Y, and ensure the chart updates when the range changes.",
+        "id": "REQ-19",
+        "summary": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/features/rates/lib/dateRanges.ts",
-          "frontend/src/features/rates/components/DateRangePresets.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesChart.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/features/rates/lib/dateRanges.ts",
-          "frontend/src/features/rates/components/DateRangePresets.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/components/HistoricalRatesChart.tsx"
-        ]
-      },
-      {
-        "id": "REQ-7",
-        "summary": "Add a dedicated historical-rates data fetcher and React Query hook (separate from live rates) that caches results by (baseCurrency, targetCurrency, dateRange) and supports manual refresh within the historical view.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/features/rates/hooks/useHistoricalRates.ts",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/api/historicalRates.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/features/rates/hooks/useHistoricalRates.ts",
-          "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-          "frontend/src/features/rates/api/historicalRates.ts"
-        ]
-      },
-      {
-        "id": "REQ-8",
-        "summary": "Expose an entry point to open historical charts from the existing rates UI (the searchable/sortable rates table), without removing or breaking existing table sorting/search behavior.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/features/rates/components/RatesTable.tsx",
           "frontend/src/pages/HomePage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/features/rates/components/RatesTable.tsx",
           "frontend/src/pages/HomePage.tsx"
         ]
       }
@@ -78,18 +36,9 @@
   },
   "changedFiles": [
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/features/rates/api/exchangeRates.ts",
-    "frontend/src/features/rates/api/historicalRates.ts",
-    "frontend/src/features/rates/components/DateRangePresets.tsx",
-    "frontend/src/features/rates/components/HistoricalRatesChart.tsx",
-    "frontend/src/features/rates/components/HistoricalRatesPanel.tsx",
-    "frontend/src/features/rates/components/RatesTable.tsx",
-    "frontend/src/features/rates/hooks/useHistoricalRates.ts",
-    "frontend/src/features/rates/lib/dateRanges.ts",
     "frontend/src/pages/HomePage.tsx",
     "project_state.json",
     "scratch/component-selection.json",

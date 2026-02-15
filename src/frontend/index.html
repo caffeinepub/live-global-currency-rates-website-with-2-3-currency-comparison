@@ -1,8 +1,28 @@
+<!DOCTYPE html>
 <html lang='en'>
     <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Live global currency rates website with 2–3 currency comparison</title>
+        <script type="module">
+          // Load AdSense script only if client ID is configured
+          // Using Vite's import.meta.env for proper environment variable access
+          (function() {
+            const adsenseClientId = import.meta.env.VITE_ADSENSE_CLIENT_ID || '';
+            
+            // Only inject if we have a valid client ID and script doesn't already exist
+            if (adsenseClientId && 
+                adsenseClientId.startsWith('ca-pub-') && 
+                !document.getElementById('adsense-script')) {
+              const script = document.createElement('script');
+              script.id = 'adsense-script';
+              script.async = true;
+              script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adsenseClientId;
+              script.crossOrigin = 'anonymous';
+              document.head.appendChild(script);
+            }
+          })();
+        </script>
     </head>
     <body>
         <div id='root'></div>

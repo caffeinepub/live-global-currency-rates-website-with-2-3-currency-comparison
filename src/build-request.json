@@ -1,95 +1,54 @@
 {
   "kind": "build_request",
-  "title": "Add historical exchange-rate charts for currencies",
+  "title": "Move the AdSense block to an above-content placement on HomePage",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-5",
-      "text": "Add historical exchange-rate charting for a selected currency relative to the currently selected base currency, using the existing Frankfurter API base URL constant (https://api.frankfurter.app).",
+      "id": "REQ-18",
+      "text": "Update the HomePage layout so the AdSense block is positioned above the main content (directly under the sticky header and above the controls/content), matching the user’s selection of \"Above\" for ad placement.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2",
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Your app is ready — would you like to add historical charts for each currency next?",
-          "Yes"
+          "Above"
         ]
       },
       "acceptanceCriteria": [
-        "From the main UI, a user can open a historical view for a specific currency.",
-        "The historical chart reflects the currently selected base currency (e.g., base=USD, target=EUR shows EUR per 1 USD over time).",
-        "Historical data fetching uses the existing Frankfurter API base (https://api.frankfurter.app) and does not require authentication.",
-        "The historical view has clear loading and error states consistent with the rest of the app."
+        "On the Home page, an AdSense ad unit is rendered directly below the sticky header and before the main content/controls section.",
+        "The ad placement change does not break existing interactions (rates table search/sort, open/close historical panel, comparison panel).",
+        "If AdSense is not configured or the ad slot is missing/empty, the existing fallback UI (“Ad space” / “Advertisement”) still renders and reserves space to keep layout stable."
       ]
     },
     {
-      "id": "REQ-6",
-      "text": "Implement a date-range control for historical charts with at least these presets: 7D, 1M, 3M, 1Y, and ensure the chart updates when the range changes.",
+      "id": "REQ-19",
+      "text": "Ensure HomePage renders only the single above-content AdSense block (and does not render additional AdSense placements elsewhere on the Home page) to align with the single placement choice requested by the user.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Yes"
+          "Above"
         ]
       },
       "acceptanceCriteria": [
-        "User can switch between 7D/1M/3M/1Y ranges and the chart refreshes accordingly.",
-        "The selected range is visible in the UI and persists while the historical view is open.",
-        "For long ranges (e.g., 1Y), the UI remains responsive (rendering and state updates do not noticeably lag)."
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Add a dedicated historical-rates data fetcher and React Query hook (separate from live rates) that caches results by (baseCurrency, targetCurrency, dateRange) and supports manual refresh within the historical view.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Yes"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Historical queries are keyed by base, target, and range so switching currencies/ranges does not overwrite other cached results.",
-        "A manual refresh control in the historical view triggers a refetch for the currently viewed currency and range.",
-        "Network failures show an actionable retry option without breaking the rest of the page."
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Expose an entry point to open historical charts from the existing rates UI (the searchable/sortable rates table), without removing or breaking existing table sorting/search behavior.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "Yes"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A user can open a chart for a currency directly from the rates table UI.",
-        "Search and sorting in the rates table continues to work exactly as before.",
-        "Opening/closing the historical view does not reset the table’s search query or sorting state."
+        "The Home page contains exactly one <AdSenseAd /> placement.",
+        "The ad is not rendered in the middle of the page content or near/above the footer once this change is implemented.",
+        "No console errors are introduced by changing the number/position of ad units."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (compose them instead).",
-    "Do not modify any files listed in frontend.immutablePaths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui).",
-    "Keep all backend logic in the single Motoko actor (backend/main.mo); this change should not require backend changes unless strictly necessary.",
     "Use English for any user-facing text.",
-    "Use the existing Frankfurter API base URL constant (https://api.frankfurter.app) as the data source for historical data as well."
+    "Do not edit files under frontend/immutablePaths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui).",
+    "Keep AdSense initialization safe on the client (no repeated pushes causing errors on re-render/navigation)."
   ],
   "nonGoals": [
-    "Adding user accounts or saving chart preferences to the backend.",
-    "Real-time streaming charts or WebSocket-based updates.",
-    "Integrating third-party auth providers or paid exchange-rate APIs."
+    "Adding new ad networks or non-AdSense monetization.",
+    "Changing exchange-rate APIs, currency calculations, or historical chart logic.",
+    "Backend changes (backend/main.mo) or any persistence/migration work."
   ],
   "imageRequirements": {
     "required": [],
